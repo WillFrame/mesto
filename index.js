@@ -17,16 +17,14 @@ function popupOpen() {
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
-    console.log("its work!");
     let popup = document.querySelector('.popup');
     let profileName = document.querySelector('.profile__name');
     let profileSubName = document.querySelector('.profile__subname');
-    let inputName = document.querySelector('.popup__input_name');
-    let inputSubName = document.querySelector('.popup__input_subname');
+    let inputName = document.querySelector('.popup__input_name').value;
+    let inputSubName = document.querySelector('.popup__input_subname').value;
 
-    profileName.textContent = inputName.value;
-    profileSubName.textContent = inputSubName.value;
-    console.log("its work!");
+    profileName.textContent = inputName;
+    profileSubName.textContent = inputSubName;
     popup.classList.toggle('popup_opened');
 }
 
@@ -37,5 +35,5 @@ function popupClose() {
 }
 
 profileEditButton.addEventListener('click', popupOpen);
-formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('click', formSubmitHandler);
 profileEditCloseButton.addEventListener('click', popupClose);
