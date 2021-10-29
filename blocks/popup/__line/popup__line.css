@@ -1,0 +1,14 @@
+.popup__line {
+    border: none;
+    background-color: rgba(0, 0, 0, .2); /* для одной версии браузера */
+    color: rgba(0, 0, 0, .2); /* для другой версии браузера */
+    height: 1px;
+    width: 358px;
+    margin: 0 0 30px;
+}
+
+@media screen and (max-width:767px) {
+    .popup__line {
+        width: 238px;
+    }
+}
