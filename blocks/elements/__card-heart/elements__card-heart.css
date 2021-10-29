@@ -1,7 +1,7 @@
 .elements__card-heart {
     border: none;
     background-color: white;
-    background-image: url(../../../images/heart.png);
+    background-image: url(../../../images/heart.svg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
