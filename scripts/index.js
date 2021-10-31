@@ -35,5 +35,5 @@ function popupClose() {
 }
 
 profileEditButton.addEventListener('click', popupOpen);
-formElement.addEventListener('click', formSubmitHandler);
+formElement.addEventListener('submit', formSubmitHandler);
 profileEditCloseButton.addEventListener('click', popupClose);
