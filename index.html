@@ -24,48 +24,7 @@
         </section>
 
         <section class="elements">
-            <div class="elements__card">
-                <img class="elements__card-photo" alt="Изображение места" src="images/karachevsk.png">
-                <div class="elements__card-info">
-                    <h2 class="elements__card-title">Карачаевск</h2>
-                    <button class="elements__card-heart" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__card">
-                <img class="elements__card-photo" alt="Изображение места" src="images/elbrus.png">
-                <div class="elements__card-info">
-                    <h2 class="elements__card-title">Гора Эльбрус</h2>
-                    <button class="elements__card-heart" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__card">
-                <img class="elements__card-photo" alt="Изображение места" src="images/dombay.png">
-                <div class="elements__card-info">
-                    <h2 class="elements__card-title">Домбай</h2>
-                    <button class="elements__card-heart" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__card">
-                <img class="elements__card-photo" alt="Изображение места" src="images/elbrus.png">
-                <div class="elements__card-info">
-                    <h2 class="elements__card-title">Гора Эльбрус</h2>
-                    <button class="elements__card-heart" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__card">
-                <img class="elements__card-photo" alt="Изображение места" src="images/dombay.png">
-                <div class="elements__card-info">
-                    <h2 class="elements__card-title">Домбай</h2>
-                    <button class="elements__card-heart" type="button"></button>
-                </div>
-            </div>
-            <div class="elements__card">
-                <img class="elements__card-photo" alt="Изображение места"  src="images/karachevsk.png">
-                <div class="elements__card-info">
-                    <h2 class="elements__card-title">Длинное название</h2>
-                    <button class="elements__card-heart" type="button"></button>
-                </div>
-            </div>
+            
         </section>
     </main>
 
@@ -73,7 +32,7 @@
         <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_content_edit-profile">
         <div class="popup__window">
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="profile-edit">
@@ -85,6 +44,29 @@
         </div>
     </div>
 
+    <div class="popup popup_content_add-card">
+        <div class="popup__window">
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" name="profile-edit">
+                <input class="popup__input popup__input_content_title" name="input-title" placeholder="Название">
+                <input class="popup__input popup__input_content_image" name="input-image" placeholder="Ссылка на картинку">
+                <button class="popup__save-button" type="submit">Создать</button>
+            </form>
+            <button class="popup__close button-styles" type="button"></button>
+        </div>
+    </div>
+
+    <template id="element__card">
+        <div class="elements__card">
+            <button class="elements__card-delete-button button-styles"></button>
+            <img class="elements__card-photo" alt="Изображение места" src="">
+            <div class="elements__card-info">
+                <h2 class="elements__card-title"></h2>
+                <button class="elements__card-heart" type="button"></button>
+            </div>
+        </div>
+    </template>
+    
     <script src="./scripts/index.js"></script>
 </body>
 </html>
