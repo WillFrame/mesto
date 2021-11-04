@@ -23,7 +23,7 @@ const initialCards = [
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-  ];
+];
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
@@ -68,6 +68,25 @@ function addNewCard(title, photo) {
     newCard.querySelector('.elements__card-photo').src = photo;
     newCard.querySelector('.elements__card-title').textContent = title;
     elementsContainer.prepend(newCard);
+    const deleteButton = newCard.querySelector('.elements__card-delete-button');
+    deleteButton.addEventListener('click', () => {
+        const element = deleteButton.closest('.elements__card');
+        element.remove();
+    });
+    const likeButton = newCard.querySelector('.elements__card-heart');
+    likeButton.addEventListener('click', () => {
+        const element = likeButton.closest('.elements__card-heart');
+        element.classList.toggle('elements__card-heart_active');
+        console.log('hi');
+    });
+//    newCard.querySelector('.elements__card-heart').addEventListener('click', (event) => {
+//      event.target.classList.toggle('.elements__card-heart_active');
+//    });
+}
+
+function popupAddCardInputClear() {
+    popupAddCardInputTitle.value = '';
+    popupAddCardInputImage.value = '';
 }
 
 profileEditButton.addEventListener('click', () => {
@@ -90,4 +109,9 @@ profileAddButton.addEventListener('click', () => {
 popupAddCardForm.addEventListener('submit', () => {
     submitPopup(popupAddCard, event);
     addNewCard(popupAddCardInputTitle.value, popupAddCardInputImage.value);
+    popupAddCardInputClear();
+})
+popupAddCardCloseButton.addEventListener('click', () => {
+    closePopup(popupAddCard);
+    popupAddCardInputClear();
 })

@@ -34,13 +34,13 @@
 
     <div class="popup popup_content_edit-profile">
         <div class="popup__window">
+            <button class="popup__close button-styles" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="profile-edit">
                 <input class="popup__input popup__input_content_name" name="input-name">
                 <input class="popup__input popup__input_content_subname" name="input-subname">
                 <button class="popup__save-button" type="submit">Отправить</button>
             </form>
-            <button class="popup__close button-styles" type="button"></button>
         </div>
     </div>
 
@@ -58,7 +58,7 @@
 
     <template id="element__card">
         <div class="elements__card">
-            <button class="elements__card-delete-button button-styles"></button>
+            <button class="elements__card-delete-button button-styles" type="button"></button>
             <img class="elements__card-photo" alt="Изображение места">
             <div class="elements__card-info">
                 <h2 class="elements__card-title"></h2>
@@ -67,6 +67,14 @@
         </div>
     </template>
     
+    <template id="popup__view-image">
+        <div class="popup_content_view-image">
+            <img alt="Изображение места" class="popup__image">
+            <h2 class="popup__view-image-title"></h2>
+            <button class="popup__close"></button>
+        </div>
+    </template>
+
     <script src="./scripts/index.js"></script>
 </body>
 </html>
