@@ -30,6 +30,8 @@ const profileAddButton = document.querySelector('.profile__add-button');
 
 const cardTemplate = document.querySelector('#element__card').content;
 const elementsContainer = document.querySelector('.elements');
+const openImageTemplate = document.querySelector('#popup__view-image').content;
+const content = document.querySelector('.content');
 
 let profileName = document.querySelector('.profile__name');
 let profileSubName = document.querySelector('.profile__subname');
@@ -77,11 +79,19 @@ function addNewCard(title, photo) {
     likeButton.addEventListener('click', () => {
         const element = likeButton.closest('.elements__card-heart');
         element.classList.toggle('elements__card-heart_active');
-        console.log('hi');
     });
-//    newCard.querySelector('.elements__card-heart').addEventListener('click', (event) => {
-//      event.target.classList.toggle('.elements__card-heart_active');
-//    });
+    const cardImage = newCard.querySelector('.elements__card-photo');
+    cardImage.addEventListener('click', () => {
+        const image = openImageTemplate.querySelector('.popup_content_view-image').cloneNode(true);
+        image.querySelector('.popup__image').src = photo;
+        image.querySelector('.popup__view-image-title').textContent = title;
+        content.append(image);
+        const imageCloseButton = image.querySelector('.popup__close');
+        imageCloseButton.addEventListener('click', () => {
+            image.remove();
+            console.log('hi');
+        });
+    });
 }
 
 function popupAddCardInputClear() {
