@@ -9,5 +9,5 @@
 
 .popup_opened {
     display: flex;
-    animation: popup__opened 0.3s ;
+    animation: popup__opened 0.3s;
 }
