@@ -32,9 +32,11 @@ const setEventListeners = (formElement, validationValue) => {
 function toggleButtonState(inputList, buttonElement, validationValue) {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(validationValue.inactiveButtonClass);
+        buttonElement.disabled = true;
     }
     else {
         buttonElement.classList.remove(validationValue.inactiveButtonClass);
+        buttonElement.disabled = false;
     }
 }
 
