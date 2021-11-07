@@ -105,6 +105,9 @@ function createNewCard(title, photo) {
 profileEditButton.addEventListener('click', () => {
     popupEditProfileInputName.value = profileName.textContent;
     popupEditProfileInputSubName.value = profileSubName.textContent;
+    inputList = Array.from(popupEditProfileForm.querySelectorAll('.popup__form'));
+    buttonElement = popupEditProfileForm.querySelector('.popup__save-button');
+    toggleButtonState(inputList, buttonElement, validationValue);
     openPopup(popupEditProfile);
 });
 popupEditProfileForm.addEventListener('submit', (event) => {
@@ -136,3 +139,4 @@ popupAddCardForm.addEventListener('submit', (event) => {
     submitPopup(popupAddCard, event);
     addNewCard(popupAddCardInputTitle.value, popupAddCardInputImage.value);
 })
+
