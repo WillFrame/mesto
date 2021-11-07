@@ -7,6 +7,13 @@ const validationValue = {
     errorClass: 'popup__error_visible'
 }
 
+function clearErrors(formElement, validationValue) {
+    const inputList = Array.from(formElement.querySelectorAll(validationValue.inputSelector));
+    inputList.forEach((inputElement) => {
+        hideInputError(formElement, inputElement, validationValue);
+    });
+}
+
 const enableValidation = (validationValue) => {
     const formList = Array.from(document.querySelectorAll(validationValue.formSelector));
     formList.forEach((formElement) => {
@@ -45,7 +52,6 @@ function hasInvalidInput(inputList) {
         return !inputElement.validity.valid;
     });
 }
-  
 
 const checkInputValidity = (formElement, inputElement, validationValue) => {
     if (!inputElement.validity.valid) {
