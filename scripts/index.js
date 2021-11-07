@@ -43,13 +43,11 @@ const popups = Array.from(document.querySelectorAll('.popup'));
 
 const popupEditProfile = document.querySelector('.popup_content_edit-profile');
 const popupEditProfileForm = popupEditProfile.querySelector('.popup__form');
-const popupEditProfileCloseButton = popupEditProfile.querySelector('.popup__close');
 const popupEditProfileInputName = popupEditProfile.querySelector('.popup__input_content_name');
 const popupEditProfileInputSubName = popupEditProfile.querySelector('.popup__input_content_subname');
 
 const popupAddCard = document.querySelector('.popup_content_add-card');
 const popupAddCardForm = popupAddCard.querySelector('.popup__form');
-const popupAddCardCloseButton = popupAddCard.querySelector('.popup__close');
 const popupAddCardInputTitle = popupAddCard.querySelector('.popup__input_content_title');
 const popupAddCardInputImage = popupAddCard.querySelector('.popup__input_content_image');
 
