@@ -59,6 +59,7 @@ initialCards.forEach((item) => {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeByEscape);
 }
 
 function submitPopup(popup, event) {
@@ -68,6 +69,7 @@ function submitPopup(popup, event) {
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEscape);
 }
 
 function addNewCard(title, photo) {
@@ -124,12 +126,12 @@ popups.forEach((item) => {
     });
 });
 
-document.addEventListener('keydown', (event) => {
+function closeByEscape(event) {
     if (event.key === 'Escape') {
         const currentPopup = document.querySelector('.popup_opened');
         closePopup(currentPopup);
     }
-});
+};
 
 profileAddButton.addEventListener('click', () => {
     popupAddCardInputClear();
