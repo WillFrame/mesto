@@ -30,7 +30,7 @@ class FormValidation {
         const buttonElement = formElement.querySelector(this._submitButtonSelector);
         this.toggleButtonState(inputList, buttonElement);
         inputList.forEach((inputElement) => {
-            inputElement.addEventListener('input', function () {
+            inputElement.addEventListener('input', () => {
                 this._checkInputValidity(formElement, inputElement);
                 this.toggleButtonState(inputList, buttonElement);
             });
