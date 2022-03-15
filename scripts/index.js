@@ -39,7 +39,6 @@ const validationValue = {
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
-const popupViewImage = document.querySelector('.popup_content_view-image');
 const elementsContainer = document.querySelector('.elements');
 
 const profileName = document.querySelector('.profile__name');
@@ -67,7 +66,7 @@ function addNewCard(title, photo) {
     elementsContainer.prepend(cardElement);
 }
 
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
 }
@@ -86,7 +85,7 @@ profileEditButton.addEventListener('click', () => {
     popupEditProfileInputName.value = profileName.textContent;
     popupEditProfileInputSubName.value = profileSubName.textContent;
     checkNewOpen(popupEditProfileForm);
-    clearErrors(popupEditProfileForm, validationValue);
+    clearErrors(popupEditProfileForm);
     openPopup(popupEditProfile);
 });
 
@@ -95,6 +94,12 @@ popupEditProfileForm.addEventListener('submit', (event) => {
     profileName.textContent = popupEditProfileInputName.value;
     profileSubName.textContent = popupEditProfileInputSubName.value;
 });
+
+function checkNewOpen(form) {
+    const inputList = Array.from(form.querySelectorAll('.popup__input'));
+    buttonElement = form.querySelector('.popup__save-button');
+    toggleButtonState(inputList, buttonElement);
+}
 
 popups.forEach((item) => {
     item.addEventListener('click', (event) => {
@@ -114,7 +119,7 @@ function closeByEscape(event) {
 profileAddButton.addEventListener('click', () => {
     popupAddCardForm.reset();
     checkNewOpen(popupAddCardForm);
-    clearErrors(popupAddCardForm, validationValue);
+    clearErrors(popupAddCardForm);
     openPopup(popupAddCard);
 });
 
@@ -123,4 +128,4 @@ popupAddCardForm.addEventListener('submit', (event) => {
     addNewCard(popupAddCardInputTitle.value, popupAddCardInputImage.value);
 });
 
-enableValidation(validationValue);
+new FormValidation(validationValue).enableValidation();

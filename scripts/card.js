@@ -1,3 +1,5 @@
+import { openPopup } from "./index.js";
+
 class Card {
     constructor(title, photo) {
         this._title = title;
@@ -10,9 +12,7 @@ class Card {
     }
 
     generateCard() {
-        console.log('work');
         this._element = this._getTemplate();
-        console.log('work');
         this._setEventListeners();
         this._element.querySelector('.elements__card-photo').src = this._photo;
         this._element.querySelector('.elements__card-photo').alt = this._title;
@@ -21,37 +21,30 @@ class Card {
     }
 
     _setEventListeners() {
-        console.log('work');
         this._element.querySelector('.elements__card-delete-button').addEventListener('click', () => {
             this._handleDeleteCard();
         });
-        console.log('work');
         this._element.querySelector('.elements__card-heart').addEventListener('click', () => {
             this._handleLike();
         });
-        console.log('work');
         this._element.querySelector('.elements__card-photo').addEventListener('click', () => {
             this._handlePopupViewImage();
         });
-        console.log('work');
     }
 
     _handleDeleteCard() {
         this._element.querySelector('.elements__card-delete-button').closest('.elements__card').remove();
-        console.log('work');
     }
 
     _handleLike() {
         this._element.querySelector('.elements__card-heart').classList.toggle('elements__card-heart_active');
-        console.log('work');
     }
 
     _handlePopupViewImage() {
         document.querySelector('.popup__image').src = this._photo;
         document.querySelector('.popup__image').alt = this._title;
         document.querySelector('.popup__view-image-title').textContent = this._title;
-        openPopup(popupViewImage);
-        console.log('work');
+        openPopup(document.querySelector('.popup_content_view-image'));
     }
 }
 
