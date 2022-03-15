@@ -1,4 +1,5 @@
 import Card from './card.js';
+import FormValidation from './validate.js';
 
 const initialCards = [
     {
@@ -27,6 +28,15 @@ const initialCards = [
     }
 ];
 
+const validationValue = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+}
+
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupViewImage = document.querySelector('.popup_content_view-image');
@@ -51,6 +61,12 @@ initialCards.forEach((item) => {
     addNewCard(item.name, item.link);
 });
 
+function addNewCard(title, photo) {
+    const card = new Card(title, photo);
+    const cardElement = card.generateCard();
+    elementsContainer.prepend(cardElement);
+}
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeByEscape);
@@ -64,18 +80,6 @@ function submitPopup(popup, event) {
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeByEscape);
-}
-
-function addNewCard(title, photo) {
-    const card = new Card(title, photo);
-    const cardElement = card.generateCard();
-    elementsContainer.prepend(cardElement);
-}
-
-function checkNewOpen(form) {
-    inputList = Array.from(form.querySelectorAll('.popup__input'));
-    buttonElement = form.querySelector('.popup__save-button');
-    toggleButtonState(inputList, buttonElement, validationValue);
 }
 
 profileEditButton.addEventListener('click', () => {
@@ -118,3 +122,5 @@ popupAddCardForm.addEventListener('submit', (event) => {
     submitPopup(popupAddCard, event);
     addNewCard(popupAddCardInputTitle.value, popupAddCardInputImage.value);
 });
+
+enableValidation(validationValue);
