@@ -29,7 +29,7 @@ const initialCards = [
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
-
+const popupViewImage = document.querySelector('.popup_content_view-image');
 const elementsContainer = document.querySelector('.elements');
 
 const profileName = document.querySelector('.profile__name');
