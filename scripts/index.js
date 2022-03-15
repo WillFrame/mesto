@@ -85,7 +85,7 @@ profileEditButton.addEventListener('click', () => {
     popupEditProfileInputName.value = profileName.textContent;
     popupEditProfileInputSubName.value = profileSubName.textContent;
     checkNewOpen(popupEditProfileForm);
-    clearErrors(popupEditProfileForm);
+    new FormValidation(validationValue).clearErrors(popupEditProfileForm);
     openPopup(popupEditProfile);
 });
 
@@ -97,8 +97,8 @@ popupEditProfileForm.addEventListener('submit', (event) => {
 
 function checkNewOpen(form) {
     const inputList = Array.from(form.querySelectorAll('.popup__input'));
-    buttonElement = form.querySelector('.popup__save-button');
-    toggleButtonState(inputList, buttonElement);
+    const buttonElement = form.querySelector('.popup__save-button');
+    new FormValidation(validationValue).toggleButtonState(inputList, buttonElement);
 }
 
 popups.forEach((item) => {
@@ -119,7 +119,7 @@ function closeByEscape(event) {
 profileAddButton.addEventListener('click', () => {
     popupAddCardForm.reset();
     checkNewOpen(popupAddCardForm);
-    clearErrors(popupAddCardForm);
+    new FormValidation(validationValue).clearErrors(popupAddCardForm);
     openPopup(popupAddCard);
 });
 

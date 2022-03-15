@@ -8,10 +8,10 @@ class FormValidation {
         this._errorClass = formValidation.errorClass;
     }
 
-    _clearErrors(formElement) {
+    clearErrors(formElement) {
         const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
         inputList.forEach((inputElement) => {
-            hideInputError(formElement, inputElement);
+            this._hideInputError(formElement, inputElement);
         });
     }
 
@@ -28,16 +28,16 @@ class FormValidation {
     _setEventListeners(formElement) {
         const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
         const buttonElement = formElement.querySelector(this._submitButtonSelector);
-        this._toggleButtonState(inputList, buttonElement);
+        this.toggleButtonState(inputList, buttonElement);
         inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', function () {
                 this._checkInputValidity(formElement, inputElement);
-                this._toggleButtonState(inputList, buttonElement);
+                this.toggleButtonState(inputList, buttonElement);
             });
         });
     }
 
-    _toggleButtonState(inputList, buttonElement) {
+    toggleButtonState(inputList, buttonElement) {
         if (this._hasInvalidInput(inputList)) {
             buttonElement.classList.add(this._inactiveButtonClass);
             buttonElement.disabled = true;
