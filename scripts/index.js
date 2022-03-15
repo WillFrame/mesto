@@ -102,7 +102,7 @@ class Card {
 initialCards.forEach((item) => {
     const card = new Card(item);
     const cardElement = card.generateCard();
-    elementsWrap.append(cardElement);
+    elementsContainer.append(cardElement);
   });
 
 function openPopup(popup) {
