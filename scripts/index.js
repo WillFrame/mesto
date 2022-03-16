@@ -59,15 +59,15 @@ const popupAddCardInputImage = popupAddCard.querySelector('.popup__input_content
 const validationProfileForm = new FormValidation(validationValue, popupEditProfileForm);
 const validationCardForm = new FormValidation(validationValue, popupAddCardForm);
 
-initialCards.forEach((item, template) => {
-    const card = createCard(item, template);
+initialCards.forEach((item) => {
+    const card = createCard(item);
     elementsContainer.prepend(card);
 });
 
-function createCard(data, template) {
-    const card = new Card(data, template);
+function createCard(data) {
+    const card = new Card(data, '#element__card');
     const cardElement = card.generateCard();
-    return cardElement
+    return cardElement;
 }
 
 export function openPopup(popup) {
