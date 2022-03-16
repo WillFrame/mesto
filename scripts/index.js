@@ -1,5 +1,5 @@
-import Card from './card.js';
-import FormValidation from './validate.js';
+import Card from './Card.js';
+import FormValidation from './FormValidation.js';
 
 const initialCards = [
     {
@@ -56,14 +56,18 @@ const popupAddCardForm = popupAddCard.querySelector('.popup__form');
 const popupAddCardInputTitle = popupAddCard.querySelector('.popup__input_content_title');
 const popupAddCardInputImage = popupAddCard.querySelector('.popup__input_content_image');
 
-initialCards.forEach((item) => {
-    addNewCard(item.name, item.link);
+const validationProfileForm = new FormValidation(validationValue, popupEditProfileForm);
+const validationCardForm = new FormValidation(validationValue, popupAddCardForm);
+
+initialCards.forEach((item, template) => {
+    const card = createCard(item, template);
+    elementsContainer.prepend(card);
 });
 
-function addNewCard(title, photo) {
-    const card = new Card(title, photo);
+function createCard(data, template) {
+    const card = new Card(data, template);
     const cardElement = card.generateCard();
-    elementsContainer.prepend(cardElement);
+    return cardElement
 }
 
 export function openPopup(popup) {
@@ -84,8 +88,8 @@ function closePopup(popup) {
 profileEditButton.addEventListener('click', () => {
     popupEditProfileInputName.value = profileName.textContent;
     popupEditProfileInputSubName.value = profileSubName.textContent;
-    checkNewOpen(popupEditProfileForm);
-    new FormValidation(validationValue).clearErrors(popupEditProfileForm);
+    checkNewOpen(popupEditProfileForm, validationProfileForm);
+    validationProfileForm.clearErrors(popupEditProfileForm);
     openPopup(popupEditProfile);
 });
 
@@ -95,10 +99,10 @@ popupEditProfileForm.addEventListener('submit', (event) => {
     profileSubName.textContent = popupEditProfileInputSubName.value;
 });
 
-function checkNewOpen(form) {
+function checkNewOpen(form, validationForm) {
     const inputList = Array.from(form.querySelectorAll('.popup__input'));
     const buttonElement = form.querySelector('.popup__save-button');
-    new FormValidation(validationValue).toggleButtonState(inputList, buttonElement);
+    validationForm.toggleButtonState(inputList, buttonElement);
 }
 
 popups.forEach((item) => {
@@ -118,14 +122,16 @@ function closeByEscape(event) {
 
 profileAddButton.addEventListener('click', () => {
     popupAddCardForm.reset();
-    checkNewOpen(popupAddCardForm);
-    new FormValidation(validationValue).clearErrors(popupAddCardForm);
+    checkNewOpen(popupAddCardForm, validationCardForm);
+    validationCardForm.clearErrors(popupAddCardForm);
     openPopup(popupAddCard);
 });
 
 popupAddCardForm.addEventListener('submit', (event) => {
     submitPopup(popupAddCard, event);
-    addNewCard(popupAddCardInputTitle.value, popupAddCardInputImage.value);
+    const card = createCard( { name: popupAddCardInputTitle.value, link: popupAddCardInputImage.value });
+    elementsContainer.prepend(card);
 });
 
-new FormValidation(validationValue).enableValidation();
+validationProfileForm.enableValidation();
+validationCardForm.enableValidation();
