@@ -1,5 +1,3 @@
-import { handleCardClick } from '../../pages/index.js';
-
 export class Card {
     constructor(data, template, handleCardClick) {
         this._title = data.name;
@@ -30,7 +28,7 @@ export class Card {
             this._handleLike();
         });
         this._element.querySelector('.elements__card-photo').addEventListener('click', () => {
-            handleCardClick(this._title, this._photo);
+            this._handleCardClick(this._title, this._photo);
         });
     }
 

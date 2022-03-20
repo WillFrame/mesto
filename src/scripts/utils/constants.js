@@ -1,1 +1,21 @@
-const abc = 2;
+export const validationValue = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+}
+
+export const profileEditButton = document.querySelector('.profile__edit-button');
+export const profileAddButton = document.querySelector('.profile__add-button');
+
+const popupEditProfile = document.querySelector('.popup_content_edit-profile');
+export const popupEditProfileForm = popupEditProfile.querySelector('.popup__form');
+export const popupEditProfileInputName = popupEditProfile.querySelector('.popup__input_content_name');
+export const popupEditProfileInputInfo = popupEditProfile.querySelector('.popup__input_content_subname');
+
+const popupAddCard = document.querySelector('.popup_content_add-card');
+export const popupAddCardForm = popupAddCard.querySelector('.popup__form');
+export const popupAddCardInputTitle = popupAddCard.querySelector('.popup__input_content_title');
+export const popupAddCardInputImage = popupAddCard.querySelector('.popup__input_content_image');
