@@ -1,6 +1,5 @@
 export class Card {
     constructor(data, template, handleCardClick) {
-        console.log('constructor', {data});
         this._title = data.title;
         this._photo = data.photo;
         this._template = template;
@@ -13,10 +12,8 @@ export class Card {
     }
 
     generateCard() {
-        console.log('generate 0', {item: this});
         this._element = this._getTemplate();
         this._setEventListeners();
-        console.log('generate', {item: this});
         this._element.querySelector('.elements__card-photo').src = this._photo;
         this._element.querySelector('.elements__card-photo').alt = this._title;
         this._element.querySelector('.elements__card-title').textContent = this._title;
