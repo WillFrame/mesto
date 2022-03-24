@@ -5,6 +5,7 @@ import { PopupWithForm } from '../scripts/Components/PopupWithForm.js';
 import { Section } from '../scripts/Components/Section.js';
 import { UserInfo } from '../scripts/Components/UserInfo.js';
 import { Api } from '../scripts/Components/Api.js';
+import { ConfirmationPopup } from '../scripts/Components/ConfirmationPopup.js';
 
 const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-37',
@@ -16,19 +17,17 @@ const api = new Api({
 
 let userId;
 
-api.getProfile()
-    .then(res => {
-        userInfo.setUserInfo(res.name, res.about);
+Promise.all([api.getProfile(), api.getInitialCards()])
+    .then(([res, cardList]) => {
+        userInfo.setUserInfo(res.name, res.about, res.avatar);
+        userInfo.setNewAvatar(res.avatar);
         userId = res._id;
-    });
-
-api.getInitialCards()
-    .then(cardList => {
         cardList.forEach(data => {
             const newCard = createCard(data);
             section.addItem(newCard);
         });
-    });
+    })
+    .catch(err => console.log(err));
 
 import { validationValue, profileEditButton, profileAddButton, profileAvatarButton, popupEditProfileForm, popupEditProfileInputName, 
 popupEditProfileInputInfo, popupAddCardForm, popupEditAvatarForm} from '../scripts/utils/constants.js';
@@ -41,8 +40,9 @@ const validationAvatarForm = new FormValidation(validationValue, popupEditAvatar
 const popupWithImage = new PopupWithImage('.popup_content_view-image');
 const userInfo = new UserInfo( { nameSelector: '.profile__name', infoSelector: '.profile__subname', avatarSelector: '.profile__avatar'});
 const popupEditProfileInfo = new PopupWithForm('.popup_content_edit-profile', handleEditProfileSubmit);
-const popupCloseSubmit = new PopupWithForm('.popup_content_close-submit', () => {})
+const popupCloseSubmit = new ConfirmationPopup('.popup_content_close-submit')
 const popupEditProfileAvatar = new PopupWithForm('.popup_content_edit-avatar', handleEditAvatarSubmit);
+const popupAddNewCard = new PopupWithForm('.popup_content_add-card', handleAddCardSubmit);
 
 const section = new Section( {
     items: [], 
@@ -51,8 +51,6 @@ const section = new Section( {
         section.addItem(newCard);
     }
 }, '.elements');
-
-const popupAddNewCard = new PopupWithForm('.popup_content_add-card', handleAddCardSubmit);
 
 function createCard(data) {
     const card = new Card(data, userId, '#element__card', handleCardClick, 
@@ -64,15 +62,19 @@ function createCard(data) {
                 popupCloseSubmit.close();
                 card.handleDeleteCard();
             })
+            .catch(err => console.log(err))
+            .finally(() => popupCloseSubmit.formIsLoading(false));
         });
     },
     (id) => {
         if (card.isLiked()) {
             api.deleteLike(id)
-            .then(res => card.setLikes(res.likes));
+            .then(res => card.setLikes(res.likes))
+            .catch(err => console.log(err));
         } else {
             api.addLike(id)
-            .then(res => card.setLikes(res.likes));
+            .then(res => card.setLikes(res.likes))
+            .catch(err => console.log(err));
         }
     }
     );
@@ -89,7 +91,9 @@ function handleEditProfileSubmit(data) {
     .then(() => {
         userInfo.setUserInfo(data.name, data.info);
         this.close();
-    });
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupEditProfileInfo.formIsLoading(false));
 }
 
 function handleAddCardSubmit(item) {
@@ -98,16 +102,19 @@ function handleAddCardSubmit(item) {
         const newCard = createCard(res);
         section.addItem(newCard);
         this.close();
-    });
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupAddNewCard.formIsLoading(false));
 }
 
 function handleEditAvatarSubmit(data) {
     api.editAvatar(data.avatar)
     .then((res) => {
-        console.log(res);
         userInfo.setNewAvatar(data.avatar);
         this.close();
-    });
+    })
+    .catch(err => console.log(err))
+    .finally(() => popupEditProfileAvatar.formIsLoading(false));
 }
 
 profileAddButton.addEventListener('click', () => {

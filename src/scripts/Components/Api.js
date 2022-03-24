@@ -8,18 +8,16 @@ export class Api {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .catch(err => console.log(err));
+        .then(this._checkResponse)
     }
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .catch(err => console.log(err));
+        .then(this._checkResponse)
     }
-  
+
     editProfile(name, about) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: "PATCH",
@@ -29,8 +27,7 @@ export class Api {
                 about
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .catch(err => console.log(err));
+        .then(this._checkResponse)
     }
 
     addCard(name, link) {
@@ -42,8 +39,7 @@ export class Api {
                 link
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .catch(err => console.log(err));
+        .then(this._checkResponse)
     }
 
     deleteCard(id) {
@@ -51,8 +47,7 @@ export class Api {
             method: "DELETE",
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .catch(err => console.log(err));
+        .then(this._checkResponse)
     }
 
     addLike(id) {
@@ -60,8 +55,7 @@ export class Api {
             method: "PUT",
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .catch(err => console.log(err));
+        .then(this._checkResponse)
     }
 
     deleteLike(id) {
@@ -69,8 +63,7 @@ export class Api {
             method: "DELETE",
             headers: this._headers
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .catch(err => console.log(err));
+        .then(this._checkResponse)
     }
 
     editAvatar(avatar) {
@@ -81,7 +74,10 @@ export class Api {
                 avatar
             })
         })
-        .then(res => res.ok ? res.json() : Promise.reject(res.status))
-        .catch(err => console.log(err));
+        .then(this._checkResponse)
+    }
+
+    _checkResponse(res) {
+        return res.ok ? res.json() : Promise.reject(res.status);
     }
 }
